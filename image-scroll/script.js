@@ -29,10 +29,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const clampedPercentage = Math.min(Math.max(nextPercentage, -100), 0);
 
     track.dataset.percentage = clampedPercentage;
-    track.style.transform = `translate(${clampedPercentage}%, -50%)`;
+    track.animate(
+      {
+        transform: `translate(${clampedPercentage}%, -50%)`,
+      },
+      { duration: 1200, fill: "forwards" }
+    );
 
-    for (const image of track.querySelectorAll(".image")) {
-      image.style.objectPosition = `${clampedPercentage + 100}% 50%`;
+    for (const image of track.getElementsByClassName("image")) {
+      image.animate(
+        {
+          objectPosition: `${100 + nextPercentage}% center`,
+        },
+        { duration: 1200, fill: "forwards" }
+      );
     }
+
+    // for (const image of track.querySelectorAll(".image")) {
+    //   image.style.objectPosition = `${clampedPercentage + 100}% 50%`;
+    // }
   };
 });
