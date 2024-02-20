@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.onmouseup = () => {
     track.dataset.mouseDownAt = "0";
+    track.dataset.prevPercentage = track.dataset.percentage;
   };
 
   window.onmousemove = (e) => {
@@ -21,8 +22,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
     const maxDelta = window.innerWidth / 2;
 
-    const percentage = (mouseDelta / maxDelta) * 100;
+    const percentage = (mouseDelta / maxDelta) * -100;
+    const nextPercentage =
+      parseFloat(track.dataset.prevPercentage) + percentage;
 
-    track.style.transform = `translate(${percentage}%, -50%)`;
+    track.dataset.percentage = nextPercentage;
+    track.style.transform = `translate(${nextPercentage}%, -50%)`;
   };
 });
