@@ -19,6 +19,12 @@ body {
   height: 56vmin;
   object-fit: cover;
   object-position: 100% 50%;
+  filter: grayscale(100%);
+  transition: filter 0.5s ease-in-out;
+}
+
+#image-track > .image:hover {
+  filter: grayscale(0%);
 }
 
 #image-track {
