@@ -26,7 +26,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const nextPercentage =
       parseFloat(track.dataset.prevPercentage) + percentage;
 
-    track.dataset.percentage = nextPercentage;
-    track.style.transform = `translate(${nextPercentage}%, -50%)`;
+    const clampedPercentage = Math.min(Math.max(nextPercentage, -100), 0);
+
+    track.dataset.percentage = clampedPercentage;
+    track.style.transform = `translate(${clampedPercentage}%, -50%)`;
+
+    for (const image of track.querySelectorAll(".image")) {
+      image.style.objectPosition = `${clampedPercentage + 100}% 50%`;
+    }
   };
 });
